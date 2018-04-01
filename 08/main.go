@@ -52,6 +52,7 @@ func main() {
 				i++
 			}
 
+			// ใช้ตัวแปร content แทน fix text
 			body := fmt.Sprintf(`<!DOCTYPE html>
 				<html lang="en">
 					<head>
