@@ -1,0 +1,2 @@
+1. code นี้จะใส่ infinite for loop เข้าไป เพื่อให้โปรแกรมสามารถวนกลับไปรอการ request ของ client รอบถัดไปทันทีเมื่อ write string เสร็จ
+2. แต่ client ยังไม่คืน shell ต้องกด ctrl+c เอง เพื่อ close connection เอง แทน server
