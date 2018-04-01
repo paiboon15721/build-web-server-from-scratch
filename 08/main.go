@@ -45,6 +45,12 @@ func main() {
 					if method == "GET" && uri == "/page2" {
 						content = "Page 2"
 					}
+
+					// method สามารถเป็นอะไรก็ได้ แต่ควรจะทำตาม convention
+					// สามารถทดลองยิงด้วย nc ได้
+					if method == "WHATEVER" && uri == "/" {
+						content = "This is Easter Egg"
+					}
 				}
 				if ln == "" {
 					break
