@@ -14,6 +14,7 @@ func main() {
 		panic(err)
 	}
 
+	// เพิ่ม infinite loop เพื่อให้สามารถรอรับ request ถัดไปได้
 	for {
 		// code จะหยุดรอที่บันทัดนี้ จนกว่าจะมี client request เข้ามา
 		conn, err := li.Accept()
