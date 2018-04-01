@@ -1,0 +1,2 @@
+1. เมื่อ client request เข้ามา จะได้ข้อความจาก server และคืน shell ทันที เนื่องจาก server สั่ง close connection นั่นเอง
+2. แก้ไขการ handle error จาก panic เป็นแค่ log เพื่อป้องกันการกระทบการใช้งานจาก request อื่นๆ
