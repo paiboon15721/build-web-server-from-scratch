@@ -35,7 +35,7 @@ func main() {
 			body := `<!DOCTYPE html><html lang="en"><head><meta charet="UTF-8"><title></title></head><body><strong>Hello World</strong></body></html>`
 			fmt.Fprint(conn, "HTTP/1.1 200 OK\r\n")
 			fmt.Fprintf(conn, "Content-Length: %d\r\n", len(body))
-			fmt.Fprint(conn, "Content-Type: text/html\r\n")
+			fmt.Fprint(conn, "Content-Type: text/html; charset=utf-8\r\n")
 			fmt.Fprint(conn, "\r\n")
 			fmt.Fprint(conn, body)
 			conn.Close()
