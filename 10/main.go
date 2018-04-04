@@ -20,7 +20,7 @@ func main() {
 			continue
 		}
 
-		go func() {
+		go func(conn net.Conn) {
 			scanner := bufio.NewScanner(conn)
 			for scanner.Scan() {
 				ln := scanner.Text()
@@ -35,6 +35,6 @@ func main() {
 			fmt.Fprint(conn, "Content-Type: text/html\r\n\r\n")
 			fmt.Fprint(conn, body)
 			conn.Close()
-		}()
+		}(conn)
 	}
 }

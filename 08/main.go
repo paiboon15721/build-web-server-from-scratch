@@ -21,7 +21,7 @@ func main() {
 			continue
 		}
 
-		go func() {
+		go func(conn net.Conn) {
 			// ประกาศตัวแปรเพื่อเก็บ content ในแต่ละ route
 			var content string
 
@@ -75,6 +75,6 @@ func main() {
 			fmt.Fprint(conn, "\r\n")
 			fmt.Fprint(conn, body)
 			conn.Close()
-		}()
+		}(conn)
 	}
 }

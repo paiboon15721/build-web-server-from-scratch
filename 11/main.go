@@ -23,7 +23,7 @@ func main() {
 			continue
 		}
 
-		go func() {
+		go func(conn net.Conn) {
 			// ประกาศตัวแปรตรงนี้ เนื่องจากนำไปใช้ข้างนอก for loop
 			var method string
 			var uri string
@@ -67,6 +67,6 @@ func main() {
 			// Close file เพื่อป้องกัน memory leak
 			f.Close()
 			conn.Close()
-		}()
+		}(conn)
 	}
 }

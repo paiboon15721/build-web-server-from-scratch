@@ -21,7 +21,7 @@ func main() {
 			continue
 		}
 
-		go func() {
+		go func(conn net.Conn) {
 			// ประกาศตัวแปรเพื่อเก็บว่ากำลัง scan บันทัดไหนอยู่
 			i := 0
 
@@ -54,6 +54,6 @@ func main() {
 			fmt.Fprint(conn, "\r\n")
 			fmt.Fprint(conn, body)
 			conn.Close()
-		}()
+		}(conn)
 	}
 }

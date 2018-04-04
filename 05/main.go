@@ -22,7 +22,7 @@ func main() {
 
 		// แตก goroutine (คล้าย thread ในภาษาอื่น) เพื่อให้สามารถทำงานแบบ concurrent ได้
 		// เพื่อให้สามารถรองรับ user หลายๆ request พร้อมๆ กันได้
-		go func() {
+		go func(conn net.Conn) {
 			// scan text จาก client
 			scanner := bufio.NewScanner(conn)
 
@@ -32,6 +32,6 @@ func main() {
 				fmt.Println(ln)
 			}
 			conn.Close()
-		}()
+		}(conn) // ส่ง connection เข้าไปที่ function พร้อม involk (iife)
 	}
 }

@@ -21,7 +21,7 @@ func main() {
 			continue
 		}
 
-		go func() {
+		go func(conn net.Conn) {
 			// ตัวแปร title เพื่อใช้แสดงว่ากำลังอยู่ที่ route ไหน
 			var title string
 			// ตัวแปร form ใช้สำหรับแสดง add form
@@ -89,6 +89,6 @@ func main() {
 			fmt.Fprint(conn, "\r\n")
 			fmt.Fprint(conn, body)
 			conn.Close()
-		}()
+		}(conn)
 	}
 }
