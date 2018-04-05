@@ -36,6 +36,7 @@ func main() {
 
 				if i == 0 {
 					words := strings.Fields(ln)
+					// ดึงเอา method และ uri ออกมาเก็บไว้ในตัวแปร เพื่อนำไปใช้เช็ค route ด้านล่าง
 					method = words[0]
 					uri = words[1]
 				}
