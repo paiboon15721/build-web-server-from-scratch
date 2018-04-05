@@ -27,7 +27,6 @@ func main() {
 			// ประกาศตัวแปรตรงนี้ เนื่องจากนำไปใช้ข้างนอก for loop
 			var method string
 			var uri string
-			var f *os.File
 
 			i := 0
 			scanner := bufio.NewScanner(conn)
@@ -39,11 +38,6 @@ func main() {
 					words := strings.Fields(ln)
 					method = words[0]
 					uri = words[1]
-
-					// router
-					if method == "GET" && uri == "/cat.jpg" {
-						f, _ = os.Open("cat.jpg")
-					}
 				}
 				if ln == "" {
 					break
@@ -51,21 +45,30 @@ func main() {
 				i++
 			}
 
-			body := `<img src="/cat.jpg">`
-			fmt.Fprint(conn, "HTTP/1.1 200 OK\r\n")
 			if method == "GET" && uri == "/cat.jpg" {
+				fmt.Fprint(conn, "HTTP/1.1 200 OK\r\n")
+
 				// ใส่ header เพื่อบอกให้ browser รู้ว่า นี่คือ image
 				fmt.Fprint(conn, "Content-Type: image/jpeg\r\n\r\n")
 
+				// เปิดไฟล์ cat.jpg
+				f, err := os.Open("cat.jpg")
+				if err != nil {
+					log.Println(err)
+				}
+
 				// เอา content ในไฟล์ เขียนลงไปที่ connection
 				io.Copy(conn, f)
-			} else {
+
+				// Close file เพื่อป้องกัน memory leak
+				f.Close()
+			}
+			if method == "GET" && uri == "/" {
+				fmt.Fprint(conn, "HTTP/1.1 200 OK\r\n")
 				fmt.Fprint(conn, "Content-Type: text/html\r\n\r\n")
-				fmt.Fprint(conn, body)
+				fmt.Fprint(conn, `<img src="/cat.jpg">`)
 			}
 
-			// Close file เพื่อป้องกัน memory leak
-			f.Close()
 			conn.Close()
 		}(conn)
 	}
